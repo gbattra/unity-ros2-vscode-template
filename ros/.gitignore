@@ -1,4 +1,4 @@
-/dev_ws/.vscode
-/dev_ws/build
-/dev_ws/install
-/dev_ws/log
+dev_ws/build
+dev_ws/install
+dev_ws/log
+dev_ws/site

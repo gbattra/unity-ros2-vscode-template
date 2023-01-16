@@ -1,24 +1,41 @@
 // See https://aka.ms/vscode-remote/devcontainer.json for format details.
 {
-    "context": "../",
-    "dockerFile": "../docker/Dockerfile",
-    "workspaceFolder": "/home/dev_ws",
-    "workspaceMount": "source=${localWorkspaceFolder}/dev_ws/src,target=/home/dev_ws/src,type=bind",
-    // This will launch the container as a non-root user
-    "remoteUser" : "ros",
-    "runArgs": [
-        // This will allow you to use a ptrace-based debugger like C++, Go, and Rust.
-        "--cap-add=SYS_PTRACE",
-        "--security-opt", "seccomp=unconfined"
-    ],
-    // These are the extensions I like to use with ROS2
-    "extensions": [
-        "ms-azuretools.vscode-docker",
-        "ms-python.python",
-        "twxs.cmake",
-        "ms-vscode.cmake-tools",
-        "ms-iot.vscode-ros",
-        "smilerobotics.urdf",
-        "yzhang.markdown-all-in-one"
-    ]
+	"dockerFile": "Dockerfile",
+	"build": {
+		"args": {
+			"WORKSPACE": "${containerWorkspaceFolder}"
+		}
+	},
+	"remoteUser": "ros",
+	// "forwardPorts": [10000],
+	"runArgs": [
+		"--network=host",
+		"--cap-add=SYS_PTRACE",
+		"--security-opt=seccomp:unconfined",
+		"--security-opt=apparmor:unconfined",
+		"--volume=/tmp/.X11-unix:/tmp/.X11-unix"
+	],
+	"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}" },
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+		"terminal.integrated.profiles.linux": {
+			"bash": {
+				"path": "bash"
+			}
+		},
+		"terminal.integrated.defaultProfile.linux": "bash"
+	},
+	"extensions": [
+		"dotjoshjohnson.xml",
+		"zachflower.uncrustify",
+		"ms-azuretools.vscode-docker",
+		"ms-iot.vscode-ros",
+		"ms-python.python",
+		"ms-vscode.cpptools",
+		"redhat.vscode-yaml",
+		"smilerobotics.urdf",
+		"streetsidesoftware.code-spell-checker",
+		"twxs.cmake",
+		"yzhang.markdown-all-in-one"
+	]
 }

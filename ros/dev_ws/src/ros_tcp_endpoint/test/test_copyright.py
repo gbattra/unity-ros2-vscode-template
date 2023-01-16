@@ -19,6 +19,5 @@ import pytest
 @pytest.mark.copyright
 @pytest.mark.linter
 def test_copyright():
-    rc = main(argv=[".", "test"])
-    if rc != 0:
-        print("WARNING: Copyright linter found problems.")
+    rc = main(argv=['.', 'test'])
+    assert rc == 0, 'Found errors'
